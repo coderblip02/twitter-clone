@@ -4,9 +4,7 @@
 
 @import url("http://fonts.cdnfonts.com/css/sf-pro-display");
 
-body {
-  font-family: "SF Pro Display", sans-serif;
-}
+
 
 @layer components {
   .hoverEffect {

@@ -10,8 +10,8 @@ function Feed() {
       name: "Sahand Ghavidel ",
       username: "codewithsahand",
       userImg: "https://www.adscientificindex.com/pictures/0b/50734.jpg",
-      img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dGVjaG5vbG9neXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-      text: "Technology is life",
+      img: "https://firebasestorage.googleapis.com/v0/b/twitter-v4.appspot.com/o/posts%2F0SaLxsL3eBeztp6n49kb%2Fimage?alt=media&token=717e5fe4-6de2-4d83-b8e5-9407d3afb933",
+      text: "Ragnar Lothbrok",
       timestamp: "2 hours ago"
     },
     {
@@ -19,8 +19,8 @@ function Feed() {
       name: "Sahand Ghavidel ",
       username: "codewithsahand",
       userImg: "https://www.adscientificindex.com/pictures/0b/50734.jpg",
-      img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHRlY2hub2xvZ3l8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-      text: "Autonomy is the future",
+      img: "https://images8.alphacoders.com/874/thumbbig-874369.webp",
+      text: "Lucifer Morningstar",
       timestamp: "2 days ago"
     },
   ];
