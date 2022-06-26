@@ -24,7 +24,10 @@ export default function Home({ newsResults, randomUsersResults }) {
 
         {/* widgets */}
 
-        <Widgets newsResults={newsResults.articles}  randomUsersResults={randomUsersResults.results}/>
+        <Widgets
+          newsResults={newsResults.articles}
+          randomUsersResults={randomUsersResults.results}
+        />
 
         {/* Modal */}
       </main>
