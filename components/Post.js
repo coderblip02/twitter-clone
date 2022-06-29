@@ -6,6 +6,7 @@ import {
   ShareIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
+import Moment from 'react-moment'
 
 function Post({ post }) {
   return (
@@ -13,7 +14,7 @@ function Post({ post }) {
       {/*  user image */}
       <img
         className="h-11 w-11 rounded-full mr-4"
-        src={post.userImg}
+        src={post.data().userImg}
         alt="user-image"
       />
 
@@ -25,10 +26,14 @@ function Post({ post }) {
           {/* post user info */}
           <div className="flex items-center space-x-1 whitespace-nowrap">
             <h4 className="font-bold text-[15px] sm:text-[16px] hover:underline">
-              {post.name}
+              {post.data().name}
             </h4>
-            <span className="text-sm sm:text-[15px]">@{post.username} - </span>
-            <span className="text-sm sm:text-[15px] hover:underline">{post.timestamp}</span>
+            <span className="text-sm sm:text-[15px]">
+              @{post.data().username} -{" "}
+            </span>
+            <span className="text-sm sm:text-[15px] hover:underline">
+              <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
+            </span>
           </div>
 
           {/* dot icon */}
@@ -38,11 +43,13 @@ function Post({ post }) {
 
         {/* Post text */}
 
-        <p className="text-gray-800 text-[15px sm:text-[16px] mb-2 ">{post.text}</p>
+        <p className="text-gray-800 text-[15px sm:text-[16px] mb-2 ">
+          {post.data().text}
+        </p>
 
         {/* Post image */}
 
-        <img className="rounded-2xl mr-2" src={post.img} alt="" />
+        <img className="rounded-2xl mr-2" src={post.data().image} alt="" />
 
         {/* Icons */}
 
