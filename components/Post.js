@@ -18,6 +18,8 @@ import { db } from "../firebase";
 import { signIn, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
+import { deleteObject, ref } from "firebase/storage";
+import { storage } from "../firebase"
 
 function Post({ post }) {
   const { data: session } = useSession();
@@ -51,6 +53,12 @@ function Post({ post }) {
     }
   }
 
+  async function deletePost() {
+    if(window.confirm("Are you sure you want to delete this post?")){
+      deleteDoc(doc(db, "posts", post.id))
+      deleteObject(ref(storage, `posts/${post.id}/image`))
+    }
+  }
   return (
     <div className="flex p-3 cursor-pointer border-b border-gray-200">
       {/*  user image */}
@@ -97,7 +105,11 @@ function Post({ post }) {
 
         <div className="flex justify-between text-gray-500 p-2 ">
           <ChatIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <TrashIcon className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100" />
+          {session?.user.uid == post?.data().id && (
+
+            <TrashIcon onClick={deletePost} className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100" />
+
+          )}
 
           <div className="flex items-center ">
             {hasLiked ? (
