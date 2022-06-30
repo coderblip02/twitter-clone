@@ -19,12 +19,15 @@ import { signIn, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { deleteObject, ref } from "firebase/storage";
-import { storage } from "../firebase"
+import { storage } from "../firebase";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atom/modalAtom";
 
 function Post({ post }) {
   const { data: session } = useSession();
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
+;  const [open, setOpen] = useRecoilState(modalState )
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -54,12 +57,10 @@ function Post({ post }) {
   }
 
   async function deletePost() {
-    if(window.confirm("Are you sure you want to delete this post?")){
+    if (window.confirm("Are you sure you want to delete this post?")) {
       deleteDoc(doc(db, "posts", post.id));
-      if(post.data().image){
-
-        deleteObject(ref(storage, `posts/${post.id}/image`))
-
+      if (post.data().image) {
+        deleteObject(ref(storage, `posts/${post.id}/image`));
       }
     }
   }
@@ -108,11 +109,12 @@ function Post({ post }) {
         {/* Icons */}
 
         <div className="flex justify-between text-gray-500 p-2 ">
-          <ChatIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <ChatIcon onClick={()=>setOpen(!open)} className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
           {session?.user.uid == post?.data().id && (
-
-            <TrashIcon onClick={deletePost} className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100" />
-
+            <TrashIcon
+              onClick={deletePost}
+              className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"
+            />
           )}
 
           <div className="flex items-center ">
@@ -137,7 +139,7 @@ function Post({ post }) {
           </div>
 
           <ShareIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <ChartBarIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <ChartBarIcon  className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
         </div>
       </div>
     </div>

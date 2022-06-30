@@ -3,6 +3,7 @@ import Image from "next/image";
 import Feed from "../components/Feed";
 import Sidebar from "../components/Sidebar";
 import Widgets from "../components/Widgets";
+import CommentModal from "../components/CommentModal";
 
 export default function Home({ newsResults, randomUsersResults }) {
   return (
@@ -30,6 +31,8 @@ export default function Home({ newsResults, randomUsersResults }) {
         />
 
         {/* Modal */}
+
+        <CommentModal />
       </main>
     </div>
   );
