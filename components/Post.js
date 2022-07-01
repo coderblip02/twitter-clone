@@ -21,14 +21,15 @@ import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../firebase";
 import { useRecoilState } from "recoil";
-import { modalState } from "../atom/modalAtom";
+import { modalState, postIdState } from "../atom/modalAtom";
 
 function Post({ post }) {
   const { data: session } = useSession();
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
-;  const [open, setOpen] = useRecoilState(modalState )
-
+  const [open, setOpen] = useRecoilState(modalState);
+  const [postId, setPostId] = useRecoilState(postIdState);
+  
   useEffect(() => {
     const unsubscribe = onSnapshot(
       collection(db, "posts", post.id, "likes"),
@@ -109,7 +110,19 @@ function Post({ post }) {
         {/* Icons */}
 
         <div className="flex justify-between text-gray-500 p-2 ">
-          <ChatIcon onClick={()=>setOpen(!open)} className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <ChatIcon
+            onClick={() => {
+              if(!session){
+                signIn();
+              } else {
+
+                setPostId(post.id)
+                setOpen(!open)}
+
+              }
+            }
+            className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
+          />
           {session?.user.uid == post?.data().id && (
             <TrashIcon
               onClick={deletePost}
@@ -139,7 +152,7 @@ function Post({ post }) {
           </div>
 
           <ShareIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <ChartBarIcon  className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <ChartBarIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
         </div>
       </div>
     </div>
