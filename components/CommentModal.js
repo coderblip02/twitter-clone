@@ -7,8 +7,15 @@ import {
   EmojiHappyIcon,
 } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
+import {
+  addDoc,
+  collection,
+  doc,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "../firebase";
-import { onSnapshot, doc } from "firebase/firestore";
+import { useRouter } from "next/router";
 import Moment from "react-moment";
 import { useSession } from "next-auth/react";
 
@@ -18,6 +25,7 @@ function CommentModal() {
   const [post, setPost] = useState({});
   const [input, setInput] = useState("");
   const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     onSnapshot(doc(db, "posts", postId), (snapshot) => {
@@ -25,7 +33,20 @@ function CommentModal() {
     });
   }, [postId, db]);
 
-  function sendComment() {}
+  async function sendComment() {
+    await addDoc(collection(db, "posts", postId, "comments"), {
+      comments: input,
+      name: session.user.name,
+      username: session.user.username,
+      userImg: session.user.image,
+      timestamp: serverTimestamp(),
+    });
+
+    setOpen(false);
+    setInput("");
+
+    router.push(`posts/${postId}`)
+  }
   return (
     <div>
       {open && (
