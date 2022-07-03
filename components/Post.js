@@ -22,7 +22,7 @@ import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../firebase";
 import { useRecoilState } from "recoil";
 import { modalState, postIdState } from "../atom/modalAtom";
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
 
 function Post({ post, id }) {
   const { data: session } = useSession();
@@ -73,7 +73,7 @@ function Post({ post, id }) {
       if (post.data().image) {
         deleteObject(ref(storage, `posts/${id}/image`));
       }
-      router.push("/")
+      router.push("/");
     }
   }
   return (
@@ -110,13 +110,21 @@ function Post({ post, id }) {
 
         {/* Post text */}
 
-        <p className="text-gray-800 text-[15px sm:text-[16px] mb-2 ">
+        <p
+          onClick={() => router.push(`/posts/${id}`)}
+          className="text-gray-800 text-[15px sm:text-[16px] mb-2 "
+        >
           {post?.data()?.text}
         </p>
 
         {/* Post image */}
 
-        <img className="rounded-2xl mr-2" src={post?.data()?.image} alt="" />
+        <img
+          onClick={() => router.push(`/posts/${id}`)}
+          className="rounded-2xl mr-2"
+          src={post?.data()?.image}
+          alt=""
+        />
 
         {/* Icons */}
 
