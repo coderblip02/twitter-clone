@@ -18,7 +18,7 @@ import {
 } from "firebase/firestore";
 import { uploadString, ref, getDownloadURL } from "firebase/storage";
 
-function input() {
+function Input() {
   const { data: session } = useSession();
   const [input, setInput] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -135,4 +135,4 @@ function input() {
   );
 }
 
-export default input;
+export default Input;
