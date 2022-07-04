@@ -3,6 +3,7 @@ import {
   ChatIcon,
   DotsHorizontalIcon,
   HeartIcon,
+
   TrashIcon,
 } from "@heroicons/react/outline";
 import Moment from "react-moment";
@@ -85,7 +86,7 @@ function Post({ comment, commentId, originalPostId }) {
     }
   }
   return (
-    <div className="flex p-3 cursor-pointer border-b border-gray-200 pl-20">
+    <div className="flex p-3 cursor-pointer border-b border-gray-200 pl-10">
       {/*  user image */}
       <img
         className="h-11 w-11 rounded-full mr-4"
